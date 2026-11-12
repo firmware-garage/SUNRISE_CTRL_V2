@@ -12,6 +12,13 @@ ESP8266 (NodeMCU v2) driving a 144 px WS2815 or WS2812 strip.
 - **OTA updates:** with the PlatformIO env `nodemcuv2_ota`, or in a browser at http://sunrise.local/update (user `admin`, password `OTA_PASSWORD`). Upload `.pio/build/nodemcuv2/firmware.bin` there.
 - **LED data:** GPIO3 (the pin marked RX). The I2S DMA engine sends the bits, so WiFi interrupts can't corrupt the timing and the CPU isn't blocked while a frame goes out. GPIO3 is not a boot strapping pin, so the strip can't stop the board from booting. `Serial` is TX only: log output still works, serial input doesn't. To go back to the old D4 (GPIO2) wiring, set `LED_DATA_GPIO` to 2 in `src/main.cpp`.
 
+## GUI
+
+<p align="center">
+  <img src="images/SUNRISE_CTRL screenshot.png" alt="App dashboard" width="600">
+</p>
+
+
 ## Power
 
 Works with a variety of light strips supported by NeoPixelBus.
