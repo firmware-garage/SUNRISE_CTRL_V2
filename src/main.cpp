@@ -1,6 +1,7 @@
 /*
-  Sunrise Light v2
-  ESP8266 + WS2815 strip (144 px), green-on-black CRT control page.
+  Sunrise Light v2.01
+  ESP8266 + WS2815 strip (144 px), green-on-black CRT control page. 
+  Resized GUI for mobile screen
 
   - First boot: no credentials -> opens AP "Sunrise-Setup" with a captive
     portal (WiFiManager). Pick your network there; it's remembered.
@@ -309,46 +310,46 @@ void checkSchedule() {
 const char PAGE[] PROGMEM = R"HTML(<!DOCTYPE html><html><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>SUNRISE</title>
 <style>
-:root{--g:#33ff66;--dim:#1c8a3a;--panel:#020d04}
+:root{--g:#33ff66;--dim:#1c8a3a;--lab:#2fd65e;--panel:#020d04}
 *{box-sizing:border-box}
 html,body{margin:0;background:#000}
-body{color:var(--g);font:15px/1.3 "Courier New",Courier,monospace;text-shadow:0 0 4px rgba(51,255,102,.55);
+body{color:var(--g);font:bold 17px/1.3 "Courier New",Courier,monospace;text-shadow:0 0 2px rgba(51,255,102,.4);
 padding:10px 10px;min-height:100vh;min-height:100dvh;background:radial-gradient(ellipse at center,#031a08 0%,#000 75%)}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;
-background:repeating-linear-gradient(to bottom,rgba(0,0,0,.28) 0,rgba(0,0,0,.28) 1px,transparent 1px,transparent 3px)}
+background:repeating-linear-gradient(to bottom,rgba(0,0,0,.12) 0,rgba(0,0,0,.12) 1px,transparent 1px,transparent 3px)}
 .wrap{max-width:560px;margin:0 auto}
 header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 0 8px}
-h1{font-size:18px;letter-spacing:2px;margin:0;font-weight:normal;white-space:nowrap}
-.sub{color:var(--dim);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+h1{font-size:20px;letter-spacing:2px;margin:0;font-weight:normal;white-space:nowrap}
+.sub{color:var(--lab);font-size:13px;font-weight:normal;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cur{display:inline-block;width:.6em;height:1em;background:var(--g);vertical-align:-2px;margin-left:3px;animation:b 1s steps(1) infinite}
 @keyframes b{50%{opacity:0}}
 fieldset{border:1px solid var(--dim);background:var(--panel);margin:0 0 9px;padding:3px 8px 8px;min-width:0}
-legend{padding:0 4px;letter-spacing:1px;font-size:13px}
+legend{padding:0 4px;letter-spacing:1px;font-size:15px}
 label{display:block}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0}
 .row label{display:flex;align-items:center;gap:6px}
 .g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:6px 0}
 .c2{grid-column:span 2}
-.k{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-bottom:2px;white-space:nowrap;overflow:hidden}
+.k{display:flex;justify-content:space-between;font-size:14px;color:var(--lab);margin-bottom:2px;white-space:nowrap;overflow:hidden}
 .k b{font-weight:normal;color:var(--g)}
 .v{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 input[type=number],input[type=time]{width:100%;background:#000;color:var(--g);border:1px solid var(--dim);
-font:inherit;padding:5px 5px;text-shadow:inherit;color-scheme:dark}
-input[type=time]{width:118px}
+font:inherit;padding:6px 6px;text-shadow:inherit;color-scheme:dark}
+input[type=time]{width:136px}
 input[type=range]{width:100%;margin:2px 0;accent-color:var(--g)}
-input[type=checkbox]{-webkit-appearance:none;appearance:none;margin:0;flex:none;width:18px;height:18px;background:#000;border:1px solid var(--g);box-shadow:0 0 4px rgba(51,255,102,.55);cursor:pointer;display:grid;place-content:center}
+input[type=checkbox]{-webkit-appearance:none;appearance:none;margin:0;flex:none;width:24px;height:24px;background:#000;border:1px solid var(--g);box-shadow:0 0 4px rgba(51,255,102,.55);cursor:pointer;display:grid;place-content:center}
 input[type=checkbox]:checked{background:var(--g);box-shadow:0 0 8px var(--g)}
-input[type=checkbox]:checked::after{content:"";width:4px;height:9px;border:solid #000;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
-button{background:#000;color:var(--g);border:1px solid var(--g);font:inherit;font-size:12px;letter-spacing:1px;padding:11px 2px;
+input[type=checkbox]:checked::after{content:"";width:6px;height:12px;border:solid #000;border-width:0 3px 3px 0;transform:translateY(-1px) rotate(45deg)}
+button{background:#000;color:var(--g);border:1px solid var(--g);font:inherit;font-size:13px;letter-spacing:.3px;padding:12px 2px;
 cursor:pointer;text-shadow:inherit;white-space:nowrap}
 button:hover,button:active{background:var(--g);color:#000;text-shadow:none}
 .btns{display:flex;gap:6px}.btns button{flex:1;min-width:0}
-.save{width:100%;font-size:13px;letter-spacing:2px}
+.save{width:100%;font-size:15px;letter-spacing:2px}
 .bar{border:1px solid var(--dim);height:10px;margin-top:6px}
 .fill{height:100%;width:0;background:var(--g);box-shadow:0 0 8px var(--g);transition:width .5s}
-#msg{min-height:1.25em;margin:4px 0;font-size:12px}
-.foot{color:var(--dim);font-size:11px}.foot a{color:var(--dim)}
-@media(max-width:350px){body{padding:8px 6px}.k{font-size:10px}button{font-size:11px;letter-spacing:0}fieldset{padding:3px 6px 8px}}
+#msg{min-height:1.25em;margin:4px 0;font-size:14px}
+.foot{color:var(--lab);font-size:13px;font-weight:normal}.foot a{color:var(--lab)}
+@media(max-width:350px){body{padding:8px 6px;font-size:16px}.k{font-size:12px}button{font-size:12px;letter-spacing:0}fieldset{padding:3px 6px 8px}}
 </style></head><body><div class="wrap">
 <header><h1>&gt; SUNRISE_CTRL<span class="cur"></span></h1><div class="sub" id="host">sunrise.local</div></header>
 <fieldset><legend>STATUS</legend>
@@ -361,18 +362,18 @@ button:hover,button:active{background:var(--g);color:#000;text-shadow:none}
 </fieldset>
 <form id="f">
 <fieldset><legend>SUNRISE</legend>
-<div class="row"><label for="enabled"><input type="checkbox" id="enabled" name="enabled">ALARM ENABLED</label>
+<div class="row"><label for="enabled"><input type="checkbox" id="enabled" name="enabled">ALARM</label>
 <label for="start">START<input type="time" id="start" name="start" required></label></div>
 <div class="g3">
-<label><span class="k">DURATION (MIN)</span><input type="number" id="sunriseMin" name="sunriseMin" min="1" max="180"></label>
-<label><span class="k">HOLD (MIN)</span><input type="number" id="holdMin" name="holdMin" min="0" max="240"></label>
-<label><span class="k">RAMP DN (MIN)</span><input type="number" id="rampDownMin" name="rampDownMin" min="0" max="120"></label>
+<label><span class="k">RISE MIN</span><input type="number" id="sunriseMin" name="sunriseMin" min="1" max="180"></label>
+<label><span class="k">HOLD MIN</span><input type="number" id="holdMin" name="holdMin" min="0" max="240"></label>
+<label><span class="k">RAMP MIN</span><input type="number" id="rampDownMin" name="rampDownMin" min="0" max="120"></label>
 </div>
 <label><span class="k">MAX BRIGHT<b id="sunriseMaxV"></b></span><input type="range" id="sunriseMax" name="sunriseMax" min="1" max="100"></label>
 </fieldset>
 <fieldset><legend>SUNSET</legend>
 <div class="g3">
-<label><span class="k">DURATION (MIN)</span><input type="number" id="sunsetMin" name="sunsetMin" min="1" max="180"></label>
+<label><span class="k">SET MIN</span><input type="number" id="sunsetMin" name="sunsetMin" min="1" max="180"></label>
 <label class="c2"><span class="k">MAX BRIGHT<b id="sunsetMaxV"></b></span><input type="range" id="sunsetMax" name="sunsetMax" min="1" max="100"></label>
 </div>
 </fieldset>
