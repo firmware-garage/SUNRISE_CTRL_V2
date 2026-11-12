@@ -2,6 +2,7 @@
   Sunrise Light v2.01
   ESP8266 + WS2815 strip (144 px), green-on-black CRT control page. 
   Resized GUI for mobile screen
+  Trying out Github push
 
   - First boot: no credentials -> opens AP "Sunrise-Setup" with a captive
     portal (WiFiManager). Pick your network there; it's remembered.
